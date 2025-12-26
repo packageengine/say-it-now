@@ -1,15 +1,15 @@
 #!/usr/bin/env node
 
-import { justSayIt, justSayItWithType, getAvailableTypes, isValidType, ResponseType } from './index';
+import { sayItNow, sayItNowWithType, getAvailableTypes, isValidType, ResponseType } from './index';
 
 const args = process.argv.slice(2);
 
 if (args.length === 0 || args[0] === '--help' || args[0] === '-h') {
   console.log(`
-Just Say It - Micro-response API
+Say It Now - Micro-response API
 
 Usage:
-  just-say-it [type] [options]
+  say-it-now [type] [options]
 
 Types:
   ${getAvailableTypes().join(', ')}
@@ -20,10 +20,10 @@ Options:
   --list, -l     List all available types
 
 Examples:
-  just-say-it no
-  just-say-it yes --json
-  just-say-it joke
-  just-say-it --list
+  say-it-now no
+  say-it-now yes --json
+  say-it-now joke
+  say-it-now --list
 `);
   process.exit(0);
 }
@@ -47,10 +47,10 @@ if (!isValidType(typeArg)) {
 
 try {
   if (jsonOutput) {
-    const result = justSayItWithType({ type: typeArg as ResponseType });
+    const result = sayItNowWithType({ type: typeArg as ResponseType });
     console.log(JSON.stringify(result, null, 2));
   } else {
-    const message = justSayIt(typeArg as ResponseType);
+    const message = sayItNow(typeArg as ResponseType);
     console.log(message);
   }
 } catch (error) {

@@ -1,11 +1,11 @@
 {
-  "name": "just-say-it",
-  "version": "1.0.0",
+  "name": "say-it-now",
+  "version": "1.0.2",
   "description": "Multiple micro-response endpoints as a service (no/yes/maybe/joke/motivation/thank-you/apology)",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "bin": {
-    "just-say-it": "dist/cli.js"
+    "say-it-now": "dist/cli.js"
   },
   "scripts": {
     "build": "tsc",

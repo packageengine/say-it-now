@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.saySomethingWithType = exports.saySomething = exports.responses = void 0;
-exports.justSayIt = justSayIt;
-exports.justSayItWithType = justSayItWithType;
+exports.saySomethingWithType = exports.saySomething = exports.justSayItWithType = exports.justSayIt = exports.responses = void 0;
+exports.sayItNow = sayItNow;
+exports.sayItNowWithType = sayItNowWithType;
 exports.getAvailableTypes = getAvailableTypes;
 exports.isValidType = isValidType;
 const responses_1 = require("./responses");
@@ -13,7 +13,7 @@ Object.defineProperty(exports, "responses", { enumerable: true, get: function ()
  * @returns A random response message
  * @throws Error if the type is invalid
  */
-function justSayIt(type = 'no') {
+function sayItNow(type = 'no') {
     if (!(0, responses_1.isValidResponseType)(type)) {
         throw new Error(`Invalid response type: "${type}". Available types: ${(0, responses_1.getAllResponseTypes)().join(', ')}`);
     }
@@ -25,7 +25,7 @@ function justSayIt(type = 'no') {
  * @returns An object containing the type and message
  * @throws Error if the type is invalid
  */
-function justSayItWithType(options = {}) {
+function sayItNowWithType(options = {}) {
     const type = options.type || 'no';
     if (!(0, responses_1.isValidResponseType)(type)) {
         throw new Error(`Invalid response type: "${type}". Available types: ${(0, responses_1.getAllResponseTypes)().join(', ')}`);
@@ -52,12 +52,14 @@ function isValidType(type) {
 }
 // Default export
 exports.default = {
-    justSayIt,
-    justSayItWithType,
+    sayItNow,
+    sayItNowWithType,
     getAvailableTypes,
     isValidType,
 };
 // Legacy exports for backward compatibility
-exports.saySomething = justSayIt;
-exports.saySomethingWithType = justSayItWithType;
+exports.justSayIt = sayItNow;
+exports.justSayItWithType = sayItNowWithType;
+exports.saySomething = sayItNow;
+exports.saySomethingWithType = sayItNowWithType;
 //# sourceMappingURL=index.js.map

@@ -33,7 +33,7 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.JustSayItServer = void 0;
+exports.SayItNowServer = void 0;
 exports.startServer = startServer;
 const http = __importStar(require("http"));
 const url_1 = require("url");
@@ -42,7 +42,7 @@ const DEFAULT_PORT = 3000;
 const DEFAULT_HOST = 'localhost';
 const MIN_PORT = 1;
 const MAX_PORT = 65535;
-class JustSayItServer {
+class SayItNowServer {
     constructor(options = {}) {
         const port = options.port ?? DEFAULT_PORT;
         const host = options.host ?? DEFAULT_HOST;
@@ -87,7 +87,7 @@ class JustSayItServer {
             if (pathname === '/' || pathname === '') {
                 res.writeHead(200, { 'Content-Type': 'application/json' });
                 res.end(JSON.stringify({
-                    message: 'Just Say It API',
+                    message: 'Say It Now API',
                     availableTypes: (0, index_1.getAvailableTypes)(),
                     endpoints: {
                         '/': 'List all available types',
@@ -117,7 +117,7 @@ class JustSayItServer {
                 return;
             }
             // Get random response
-            const result = (0, index_1.justSayItWithType)({ type: type });
+            const result = (0, index_1.sayItNowWithType)({ type: type });
             // Check if JSON format is requested
             const format = url.searchParams.get('format');
             if (format === 'json') {
@@ -145,7 +145,7 @@ class JustSayItServer {
             }, 10000); // 10 second timeout
             this.server.listen(this.port, this.host, () => {
                 clearTimeout(timeout);
-                console.log(`Just Say It server running at http://${this.host}:${this.port}`);
+                console.log(`Say It Now server running at http://${this.host}:${this.port}`);
                 resolve();
             });
             this.server.on('error', (error) => {
@@ -181,14 +181,14 @@ class JustSayItServer {
         return this.host;
     }
 }
-exports.JustSayItServer = JustSayItServer;
+exports.SayItNowServer = SayItNowServer;
 /**
  * Start the HTTP server
  * @param options - Server options including port and host
  * @returns Promise that resolves when server starts
  */
 async function startServer(options = {}) {
-    const server = new JustSayItServer(options);
+    const server = new SayItNowServer(options);
     await server.start();
     return server;
 }

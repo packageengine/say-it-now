@@ -1,10 +1,10 @@
-# 🎭 just-say-it
+# 🎭 say-it-now
 
 > **The package that says what you're thinking, but probably shouldn't say out loud.**
 
 Tired of coming up with polite ways to say "no"? Need a joke that's guaranteed to make someone groan? Want motivation but don't want to scroll through Instagram? 
 
-**just-say-it** is here to save the day (and your social life). A zero-dependency npm package that gives you the perfect response for every awkward situation. Because sometimes, you need a friend who's always ready with the right words.
+**say-it-now** is here to save the day (and your social life). A zero-dependency npm package that gives you the perfect response for every awkward situation. Because sometimes, you need a friend who's always ready with the right words.
 
 ---
 
@@ -16,7 +16,7 @@ Imagine having a friend who:
 - ✅ Knows exactly what to say when you need motivation
 - ✅ Never runs out of ways to say "thank you" or "sorry"
 
-That's **just-say-it**. Your new best friend in code form.
+That's **say-it-now**. Your new best friend in code form.
 
 ---
 
@@ -36,36 +36,36 @@ That's it. No configuration. No setup. No "please configure your environment var
 
 **JavaScript/CommonJS:**
 ```javascript
-const { justSayIt } = require('say-it-now');
+const { sayItNow } = require('say-it-now');
 
 // Need to say no? We've got 10 different ways!
-console.log(justSayIt('no'));
+console.log(sayItNow('no'));
 // "Thanks, but no thanks." ✨
 
 // Want a joke? We've got dad jokes ready!
-console.log(justSayIt('joke'));
+console.log(sayItNow('joke'));
 // "Why don't scientists trust atoms? Because they make up everything!" 😂
 
 // Monday morning motivation?
-console.log(justSayIt('motivation'));
+console.log(sayItNow('motivation'));
 // "You've got this!" 💪
 ```
 
 **TypeScript/ES Modules:**
 ```typescript
-import { justSayIt, ResponseType } from 'say-it-now';
+import { sayItNow, ResponseType } from 'say-it-now';
 
-const joke: string = justSayIt('joke');
-const motivation: string = justSayIt('motivation' as ResponseType);
+const joke: string = sayItNow('joke');
+const motivation: string = sayItNow('motivation' as ResponseType);
 ```
 
 ### Want More Info? We've Got You Covered
 
 ```javascript
-const { justSayItWithType, getAvailableTypes } = require('say-it-now');
+const { sayItNowWithType, getAvailableTypes } = require('say-it-now');
 
 // Get response with metadata (for the organized folks)
-const result = justSayItWithType({ type: 'yes' });
+const result = sayItNowWithType({ type: 'yes' });
 console.log(result);
 // { type: 'yes', message: 'Yes, absolutely!' }
 
@@ -80,9 +80,11 @@ console.log(types);
 Don't worry if you're using the old function names - they still work! We've got your back:
 
 ```javascript
-const { saySomething, saySomethingWithType } = require('say-it-now');
+const { justSayIt, justSayItWithType, saySomething, saySomethingWithType } = require('say-it-now');
 
-// These still work (but we recommend using justSayIt)
+// These still work (but we recommend using sayItNow)
+justSayIt('joke');
+justSayItWithType({ type: 'motivation' });
 saySomething('joke');
 saySomethingWithType({ type: 'motivation' });
 ```
@@ -158,18 +160,18 @@ const server = await startServer({ port: 8080, host: '0.0.0.0' });
 
 ```bash
 # Get a quick response
-just-say-it joke
-just-say-it motivation
-just-say-it no
+say-it-now joke
+say-it-now motivation
+say-it-now no
 
 # Want JSON? We've got you covered
-just-say-it yes --json
+say-it-now yes --json
 
 # See what's available
-just-say-it --list
+say-it-now --list
 
 # Need help? (We all do sometimes)
-just-say-it --help
+say-it-now --help
 ```
 
 ---
@@ -180,11 +182,11 @@ just-say-it --help
 
 ```javascript
 const express = require('express');
-const { justSayIt } = require('say-it-now');
+const { sayItNow } = require('say-it-now');
 const app = express();
 
 app.post('/decline', (req, res) => {
-  const politeNo = justSayIt('no');
+  const politeNo = sayItNow('no');
   res.json({ message: politeNo });
 });
 
@@ -195,10 +197,10 @@ app.post('/decline', (req, res) => {
 ### Example 2: The Monday Morning Motivator
 
 ```javascript
-const { justSayIt } = require('say-it-now');
+const { sayItNow } = require('say-it-now');
 
 function mondayMotivation() {
-  return justSayIt('motivation');
+  return sayItNow('motivation');
 }
 
 console.log(mondayMotivation());
@@ -209,10 +211,10 @@ console.log(mondayMotivation());
 ### Example 3: The Apologetic Developer
 
 ```javascript
-const { justSayIt } = require('say-it-now');
+const { sayItNow } = require('say-it-now');
 
 function apologizeForBreakingProduction() {
-  return justSayIt('apology');
+  return sayItNow('apology');
 }
 
 console.log(apologizeForBreakingProduction());
@@ -224,29 +226,29 @@ console.log(apologizeForBreakingProduction());
 
 ## 📚 API Reference (For the Detail-Oriented)
 
-### `justSayIt(type?: ResponseType): string`
+### `sayItNow(type?: ResponseType): string`
 
 Returns a random response message. Defaults to `'no'` (because sometimes you just need to say no).
 
 ```javascript
-justSayIt('joke');  // Returns a random joke
-justSayIt();        // Returns a random "no" (default)
+sayItNow('joke');  // Returns a random joke
+sayItNow();        // Returns a random "no" (default)
 ```
 
 **Throws:** `Error` if the type is invalid (we're helpful like that)
 
-### `justSayItWithType(options?: JustSayItOptions): JustSayItResult`
+### `sayItNowWithType(options?: SayItNowOptions): SayItNowResult`
 
 Returns an object with both the type and message (for when you need metadata).
 
 ```javascript
-justSayItWithType({ type: 'motivation' });
+sayItNowWithType({ type: 'motivation' });
 // { type: 'motivation', message: 'You've got this!' }
 ```
 
 **Throws:** `Error` if the type is invalid
 
-**Note:** Legacy function `saySomething()` is still available for backward compatibility.
+**Note:** Legacy functions `justSayIt()`, `justSayItWithType()`, `saySomething()`, and `saySomethingWithType()` are still available for backward compatibility.
 
 ### `getAvailableTypes(): ResponseType[]`
 
@@ -270,12 +272,16 @@ isValidType('invalid');  // false
 
 For existing code using the old function names, these are still available:
 
-- `saySomething(type)` → alias for `justSayIt(type)`
-- `saySomethingWithType(options)` → alias for `justSayItWithType(options)`
-- `SaySomethingOptions` → alias for `JustSayItOptions`
-- `SaySomethingResult` → alias for `JustSayItResult`
+- `justSayIt(type)` → alias for `sayItNow(type)`
+- `justSayItWithType(options)` → alias for `sayItNowWithType(options)`
+- `saySomething(type)` → alias for `sayItNow(type)`
+- `saySomethingWithType(options)` → alias for `sayItNowWithType(options)`
+- `JustSayItOptions` → alias for `SayItNowOptions`
+- `JustSayItResult` → alias for `SayItNowResult`
+- `SaySomethingOptions` → alias for `SayItNowOptions`
+- `SaySomethingResult` → alias for `SayItNowResult`
 
-We recommend migrating to the new names, but your existing code will continue to work.
+We recommend migrating to the new names (`sayItNow` and `sayItNowWithType`), but your existing code will continue to work.
 
 ---
 

@@ -2,11 +2,11 @@ import { getRandomResponse, getAllResponseTypes, ResponseType, responses, isVali
 
 export { ResponseType, responses };
 
-export interface JustSayItOptions {
+export interface SayItNowOptions {
   type?: ResponseType;
 }
 
-export interface JustSayItResult {
+export interface SayItNowResult {
   type: ResponseType;
   message: string;
 }
@@ -17,7 +17,7 @@ export interface JustSayItResult {
  * @returns A random response message
  * @throws Error if the type is invalid
  */
-export function justSayIt(type: ResponseType = 'no'): string {
+export function sayItNow(type: ResponseType = 'no'): string {
   if (!isValidResponseType(type)) {
     throw new Error(`Invalid response type: "${type}". Available types: ${getAllResponseTypes().join(', ')}`);
   }
@@ -30,7 +30,7 @@ export function justSayIt(type: ResponseType = 'no'): string {
  * @returns An object containing the type and message
  * @throws Error if the type is invalid
  */
-export function justSayItWithType(options: JustSayItOptions = {}): JustSayItResult {
+export function sayItNowWithType(options: SayItNowOptions = {}): SayItNowResult {
   const type = options.type || 'no';
   if (!isValidResponseType(type)) {
     throw new Error(`Invalid response type: "${type}". Available types: ${getAllResponseTypes().join(', ')}`);
@@ -60,15 +60,19 @@ export function isValidType(type: string): type is ResponseType {
 
 // Default export
 export default {
-  justSayIt,
-  justSayItWithType,
+  sayItNow,
+  sayItNowWithType,
   getAvailableTypes,
   isValidType,
 };
 
 // Legacy exports for backward compatibility
-export const saySomething = justSayIt;
-export const saySomethingWithType = justSayItWithType;
-export type SaySomethingOptions = JustSayItOptions;
-export type SaySomethingResult = JustSayItResult;
+export const justSayIt = sayItNow;
+export const justSayItWithType = sayItNowWithType;
+export const saySomething = sayItNow;
+export const saySomethingWithType = sayItNowWithType;
+export type JustSayItOptions = SayItNowOptions;
+export type JustSayItResult = SayItNowResult;
+export type SaySomethingOptions = SayItNowOptions;
+export type SaySomethingResult = SayItNowResult;
 

@@ -5,10 +5,10 @@ const index_1 = require("./index");
 const args = process.argv.slice(2);
 if (args.length === 0 || args[0] === '--help' || args[0] === '-h') {
     console.log(`
-Just Say It - Micro-response API
+Say It Now - Micro-response API
 
 Usage:
-  just-say-it [type] [options]
+  say-it-now [type] [options]
 
 Types:
   ${(0, index_1.getAvailableTypes)().join(', ')}
@@ -19,10 +19,10 @@ Options:
   --list, -l     List all available types
 
 Examples:
-  just-say-it no
-  just-say-it yes --json
-  just-say-it joke
-  just-say-it --list
+  say-it-now no
+  say-it-now yes --json
+  say-it-now joke
+  say-it-now --list
 `);
     process.exit(0);
 }
@@ -42,11 +42,11 @@ if (!(0, index_1.isValidType)(typeArg)) {
 }
 try {
     if (jsonOutput) {
-        const result = (0, index_1.justSayItWithType)({ type: typeArg });
+        const result = (0, index_1.sayItNowWithType)({ type: typeArg });
         console.log(JSON.stringify(result, null, 2));
     }
     else {
-        const message = (0, index_1.justSayIt)(typeArg);
+        const message = (0, index_1.sayItNow)(typeArg);
         console.log(message);
     }
 }

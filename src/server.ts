@@ -1,6 +1,6 @@
 import * as http from 'http';
 import { URL } from 'url';
-import { justSayIt, justSayItWithType, getAvailableTypes, isValidType, ResponseType } from './index';
+import { sayItNow, sayItNowWithType, getAvailableTypes, isValidType, ResponseType } from './index';
 
 export interface ServerOptions {
   port?: number;
@@ -12,7 +12,7 @@ const DEFAULT_HOST = 'localhost';
 const MIN_PORT = 1;
 const MAX_PORT = 65535;
 
-export class JustSayItServer {
+export class SayItNowServer {
   private server: http.Server;
   private port: number;
   private host: string;
@@ -70,7 +70,7 @@ export class JustSayItServer {
       if (pathname === '/' || pathname === '') {
         res.writeHead(200, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify({
-          message: 'Just Say It API',
+          message: 'Say It Now API',
           availableTypes: getAvailableTypes(),
           endpoints: {
             '/': 'List all available types',
@@ -104,7 +104,7 @@ export class JustSayItServer {
       }
 
       // Get random response
-      const result = justSayItWithType({ type: type as ResponseType });
+      const result = sayItNowWithType({ type: type as ResponseType });
 
       // Check if JSON format is requested
       const format = url.searchParams.get('format');
@@ -133,7 +133,7 @@ export class JustSayItServer {
 
       this.server.listen(this.port, this.host, () => {
         clearTimeout(timeout);
-        console.log(`Just Say It server running at http://${this.host}:${this.port}`);
+        console.log(`Say It Now server running at http://${this.host}:${this.port}`);
         resolve();
       });
 
@@ -176,8 +176,8 @@ export class JustSayItServer {
  * @param options - Server options including port and host
  * @returns Promise that resolves when server starts
  */
-export async function startServer(options: ServerOptions = {}): Promise<JustSayItServer> {
-  const server = new JustSayItServer(options);
+export async function startServer(options: ServerOptions = {}): Promise<SayItNowServer> {
+  const server = new SayItNowServer(options);
   await server.start();
   return server;
 }
