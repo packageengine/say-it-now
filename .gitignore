@@ -38,3 +38,7 @@ coverage/
 # Temporary files
 *.tmp
 *.temp
+
+# Developer documentation (not needed in repo)
+COMMIT-DIST.md
+PUBLISHING.md

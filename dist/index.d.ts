@@ -9,14 +9,16 @@ export interface SaySomethingResult {
 }
 /**
  * Get a random response of the specified type
- * @param type - The type of response to get
+ * @param type - The type of response to get (defaults to 'no')
  * @returns A random response message
+ * @throws Error if the type is invalid
  */
 export declare function saySomething(type?: ResponseType): string;
 /**
  * Get a random response with metadata
- * @param options - Options including the response type
+ * @param options - Options including the response type (defaults to 'no')
  * @returns An object containing the type and message
+ * @throws Error if the type is invalid
  */
 export declare function saySomethingWithType(options?: SaySomethingOptions): SaySomethingResult;
 /**

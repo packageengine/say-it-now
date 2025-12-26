@@ -11,6 +11,7 @@
     "build": "tsc",
     "start": "node dist/server.js",
     "dev": "ts-node src/server.ts",
+    "postinstall": "npm run build",
     "prepublishOnly": "npm run build"
   },
   "keywords": [
@@ -25,7 +26,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/packageengine/say-something.git"
   },
   "engines": {
     "node": ">=14.0.0"

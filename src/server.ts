@@ -7,14 +7,32 @@ export interface ServerOptions {
   host?: string;
 }
 
+const DEFAULT_PORT = 3000;
+const DEFAULT_HOST = 'localhost';
+const MIN_PORT = 1;
+const MAX_PORT = 65535;
+
 export class SaySomethingServer {
   private server: http.Server;
   private port: number;
   private host: string;
 
   constructor(options: ServerOptions = {}) {
-    this.port = options.port || 3000;
-    this.host = options.host || 'localhost';
+    const port = options.port ?? DEFAULT_PORT;
+    const host = options.host ?? DEFAULT_HOST;
+
+    // Validate port
+    if (!Number.isInteger(port) || port < MIN_PORT || port > MAX_PORT) {
+      throw new Error(`Invalid port: ${port}. Port must be between ${MIN_PORT} and ${MAX_PORT}`);
+    }
+
+    // Validate host
+    if (typeof host !== 'string' || host.trim().length === 0) {
+      throw new Error('Invalid host: host must be a non-empty string');
+    }
+
+    this.port = port;
+    this.host = host.trim();
     this.server = http.createServer(this.handleRequest.bind(this));
   }
 
@@ -39,7 +57,13 @@ export class SaySomethingServer {
     }
 
     try {
-      const url = new URL(req.url || '/', `http://${this.host}:${this.port}`);
+      if (!req.url) {
+        res.writeHead(400, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ error: 'Invalid request URL' }));
+        return;
+      }
+
+      const url = new URL(req.url, `http://${this.host}:${this.port}`);
       const pathname = url.pathname;
 
       // Root endpoint - show available types
@@ -103,13 +127,25 @@ export class SaySomethingServer {
 
   start(): Promise<void> {
     return new Promise((resolve, reject) => {
+      const timeout = setTimeout(() => {
+        reject(new Error('Server start timeout'));
+      }, 10000); // 10 second timeout
+
       this.server.listen(this.port, this.host, () => {
+        clearTimeout(timeout);
         console.log(`Say Something server running at http://${this.host}:${this.port}`);
         resolve();
       });
 
-      this.server.on('error', (error) => {
-        reject(error);
+      this.server.on('error', (error: NodeJS.ErrnoException) => {
+        clearTimeout(timeout);
+        if (error.code === 'EADDRINUSE') {
+          reject(new Error(`Port ${this.port} is already in use`));
+        } else if (error.code === 'EACCES') {
+          reject(new Error(`Permission denied: Cannot bind to port ${this.port}`));
+        } else {
+          reject(error);
+        }
       });
     });
   }
@@ -148,11 +184,20 @@ export async function startServer(options: ServerOptions = {}): Promise<SaySomet
 
 // CLI support - start server if this file is run directly
 if (require.main === module) {
-  const port = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
-  const host = process.env.HOST || 'localhost';
+  let port = DEFAULT_PORT;
+  const host = process.env.HOST || DEFAULT_HOST;
+
+  if (process.env.PORT) {
+    const parsedPort = parseInt(process.env.PORT, 10);
+    if (isNaN(parsedPort) || parsedPort < MIN_PORT || parsedPort > MAX_PORT) {
+      console.error(`Error: Invalid PORT environment variable: ${process.env.PORT}`);
+      process.exit(1);
+    }
+    port = parsedPort;
+  }
 
   startServer({ port, host }).catch((error) => {
-    console.error('Failed to start server:', error);
+    console.error('Failed to start server:', error instanceof Error ? error.message : error);
     process.exit(1);
   });
 }
