@@ -1,5 +1,5 @@
 {
-  "name": "just-say-it",
+  "name": "say-it-now",
   "version": "1.0.0",
   "description": "Multiple micro-response endpoints as a service (no/yes/maybe/joke/motivation/thank-you/apology)",
   "main": "dist/index.js",

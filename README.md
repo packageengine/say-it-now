@@ -23,7 +23,7 @@ That's **just-say-it**. Your new best friend in code form.
 ## 🚀 Installation (It's Super Easy, Promise)
 
 ```bash
-npm install just-say-it
+npm install say-it-now
 ```
 
 That's it. No configuration. No setup. No "please configure your environment variables" nonsense. Just install and go. We're not here to waste your time.
@@ -36,7 +36,7 @@ That's it. No configuration. No setup. No "please configure your environment var
 
 **JavaScript/CommonJS:**
 ```javascript
-const { justSayIt } = require('just-say-it');
+const { justSayIt } = require('say-it-now');
 
 // Need to say no? We've got 10 different ways!
 console.log(justSayIt('no'));
@@ -53,7 +53,7 @@ console.log(justSayIt('motivation'));
 
 **TypeScript/ES Modules:**
 ```typescript
-import { justSayIt, ResponseType } from 'just-say-it';
+import { justSayIt, ResponseType } from 'say-it-now';
 
 const joke: string = justSayIt('joke');
 const motivation: string = justSayIt('motivation' as ResponseType);
@@ -62,7 +62,7 @@ const motivation: string = justSayIt('motivation' as ResponseType);
 ### Want More Info? We've Got You Covered
 
 ```javascript
-const { justSayItWithType, getAvailableTypes } = require('just-say-it');
+const { justSayItWithType, getAvailableTypes } = require('say-it-now');
 
 // Get response with metadata (for the organized folks)
 const result = justSayItWithType({ type: 'yes' });
@@ -80,7 +80,7 @@ console.log(types);
 Don't worry if you're using the old function names - they still work! We've got your back:
 
 ```javascript
-const { saySomething, saySomethingWithType } = require('just-say-it');
+const { saySomething, saySomethingWithType } = require('say-it-now');
 
 // These still work (but we recommend using justSayIt)
 saySomething('joke');
@@ -147,7 +147,7 @@ PORT=8080 HOST=0.0.0.0 npm start
 Or programmatically:
 
 ```javascript
-const { startServer } = require('just-say-it/dist/server');
+const { startServer } = require('say-it-now/dist/server');
 
 const server = await startServer({ port: 8080, host: '0.0.0.0' });
 ```
@@ -180,7 +180,7 @@ just-say-it --help
 
 ```javascript
 const express = require('express');
-const { justSayIt } = require('just-say-it');
+const { justSayIt } = require('say-it-now');
 const app = express();
 
 app.post('/decline', (req, res) => {
@@ -195,7 +195,7 @@ app.post('/decline', (req, res) => {
 ### Example 2: The Monday Morning Motivator
 
 ```javascript
-const { justSayIt } = require('just-say-it');
+const { justSayIt } = require('say-it-now');
 
 function mondayMotivation() {
   return justSayIt('motivation');
@@ -209,7 +209,7 @@ console.log(mondayMotivation());
 ### Example 3: The Apologetic Developer
 
 ```javascript
-const { justSayIt } = require('just-say-it');
+const { justSayIt } = require('say-it-now');
 
 function apologizeForBreakingProduction() {
   return justSayIt('apology');
@@ -407,7 +407,7 @@ If this package made you smile (or at least didn't make you cry), consider givin
 ## 🔗 Links
 
 - **GitHub**: https://github.com/packageengine/just-say-it
-- **NPM**: Coming soon (we're working on it, promise!)
+- **NPM**: https://www.npmjs.com/package/say-it-now
 
 ---
 
