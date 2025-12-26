@@ -1,6 +1,6 @@
 {
   "name": "say-it-now",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Multiple micro-response endpoints as a service (no/yes/maybe/joke/motivation/thank-you/apology)",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -28,7 +28,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/packageengine/just-say-it.git"
+    "url": "https://github.com/packageengine/say-it-now.git"
   },
   "engines": {
     "node": ">=14.0.0"
