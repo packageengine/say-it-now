@@ -1,0 +1,45 @@
+{
+  "name": "say-something",
+  "version": "1.0.0",
+  "description": "Multiple micro-response endpoints as a service (no/yes/maybe/joke/motivation/thank-you/apology)",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "say-something": "dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "dev": "ts-node src/server.ts",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "api",
+    "microservice",
+    "responses",
+    "random",
+    "no-as-a-service",
+    "yes-as-a-service"
+  ],
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0",
+    "ts-node": "^10.9.0"
+  },
+  "dependencies": {},
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ]
+}
+
