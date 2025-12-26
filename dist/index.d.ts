@@ -1,9 +1,9 @@
 import { ResponseType, responses } from './responses';
 export { ResponseType, responses };
-export interface SaySomethingOptions {
+export interface JustSayItOptions {
     type?: ResponseType;
 }
-export interface SaySomethingResult {
+export interface JustSayItResult {
     type: ResponseType;
     message: string;
 }
@@ -13,14 +13,14 @@ export interface SaySomethingResult {
  * @returns A random response message
  * @throws Error if the type is invalid
  */
-export declare function saySomething(type?: ResponseType): string;
+export declare function justSayIt(type?: ResponseType): string;
 /**
  * Get a random response with metadata
  * @param options - Options including the response type (defaults to 'no')
  * @returns An object containing the type and message
  * @throws Error if the type is invalid
  */
-export declare function saySomethingWithType(options?: SaySomethingOptions): SaySomethingResult;
+export declare function justSayItWithType(options?: JustSayItOptions): JustSayItResult;
 /**
  * Get all available response types
  * @returns Array of all available response types
@@ -33,10 +33,14 @@ export declare function getAvailableTypes(): ResponseType[];
  */
 export declare function isValidType(type: string): type is ResponseType;
 declare const _default: {
-    saySomething: typeof saySomething;
-    saySomethingWithType: typeof saySomethingWithType;
+    justSayIt: typeof justSayIt;
+    justSayItWithType: typeof justSayItWithType;
     getAvailableTypes: typeof getAvailableTypes;
     isValidType: typeof isValidType;
 };
 export default _default;
+export declare const saySomething: typeof justSayIt;
+export declare const saySomethingWithType: typeof justSayItWithType;
+export type SaySomethingOptions = JustSayItOptions;
+export type SaySomethingResult = JustSayItResult;
 //# sourceMappingURL=index.d.ts.map

@@ -1,6 +1,6 @@
 import * as http from 'http';
 import { URL } from 'url';
-import { saySomething, saySomethingWithType, getAvailableTypes, isValidType, ResponseType } from './index';
+import { justSayIt, justSayItWithType, getAvailableTypes, isValidType, ResponseType } from './index';
 
 export interface ServerOptions {
   port?: number;
@@ -12,7 +12,7 @@ const DEFAULT_HOST = 'localhost';
 const MIN_PORT = 1;
 const MAX_PORT = 65535;
 
-export class SaySomethingServer {
+export class JustSayItServer {
   private server: http.Server;
   private port: number;
   private host: string;
@@ -70,7 +70,7 @@ export class SaySomethingServer {
       if (pathname === '/' || pathname === '') {
         res.writeHead(200, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify({
-          message: 'Say Something API',
+          message: 'Just Say It API',
           availableTypes: getAvailableTypes(),
           endpoints: {
             '/': 'List all available types',
@@ -104,7 +104,7 @@ export class SaySomethingServer {
       }
 
       // Get random response
-      const result = saySomethingWithType({ type: type as ResponseType });
+      const result = justSayItWithType({ type: type as ResponseType });
 
       // Check if JSON format is requested
       const format = url.searchParams.get('format');
@@ -133,7 +133,7 @@ export class SaySomethingServer {
 
       this.server.listen(this.port, this.host, () => {
         clearTimeout(timeout);
-        console.log(`Say Something server running at http://${this.host}:${this.port}`);
+        console.log(`Just Say It server running at http://${this.host}:${this.port}`);
         resolve();
       });
 
@@ -176,8 +176,8 @@ export class SaySomethingServer {
  * @param options - Server options including port and host
  * @returns Promise that resolves when server starts
  */
-export async function startServer(options: ServerOptions = {}): Promise<SaySomethingServer> {
-  const server = new SaySomethingServer(options);
+export async function startServer(options: ServerOptions = {}): Promise<JustSayItServer> {
+  const server = new JustSayItServer(options);
   await server.start();
   return server;
 }

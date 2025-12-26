@@ -42,3 +42,7 @@ coverage/
 # Developer documentation (not needed in repo)
 COMMIT-DIST.md
 PUBLISHING.md
+TEST-SUMMARY.md
+
+# Test files (for development only)
+test/

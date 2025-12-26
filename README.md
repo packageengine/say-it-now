@@ -1,10 +1,10 @@
-# 🎭 say-something
+# 🎭 just-say-it
 
 > **The package that says what you're thinking, but probably shouldn't say out loud.**
 
 Tired of coming up with polite ways to say "no"? Need a joke that's guaranteed to make someone groan? Want motivation but don't want to scroll through Instagram? 
 
-**say-something** is here to save the day (and your social life). A zero-dependency npm package that gives you the perfect response for every awkward situation. Because sometimes, you need a friend who's always ready with the right words.
+**just-say-it** is here to save the day (and your social life). A zero-dependency npm package that gives you the perfect response for every awkward situation. Because sometimes, you need a friend who's always ready with the right words.
 
 ---
 
@@ -16,14 +16,14 @@ Imagine having a friend who:
 - ✅ Knows exactly what to say when you need motivation
 - ✅ Never runs out of ways to say "thank you" or "sorry"
 
-That's **say-something**. Your new best friend in code form.
+That's **just-say-it**. Your new best friend in code form.
 
 ---
 
 ## 🚀 Installation (It's Super Easy, Promise)
 
 ```bash
-npm install say-something
+npm install just-say-it
 ```
 
 That's it. No configuration. No setup. No "please configure your environment variables" nonsense. Just install and go. We're not here to waste your time.
@@ -34,29 +34,38 @@ That's it. No configuration. No setup. No "please configure your environment var
 
 ### The Basics: Getting a Response
 
+**JavaScript/CommonJS:**
 ```javascript
-const { saySomething } = require('say-something');
+const { justSayIt } = require('just-say-it');
 
 // Need to say no? We've got 10 different ways!
-console.log(saySomething('no'));
+console.log(justSayIt('no'));
 // "Thanks, but no thanks." ✨
 
 // Want a joke? We've got dad jokes ready!
-console.log(saySomething('joke'));
+console.log(justSayIt('joke'));
 // "Why don't scientists trust atoms? Because they make up everything!" 😂
 
 // Monday morning motivation?
-console.log(saySomething('motivation'));
+console.log(justSayIt('motivation'));
 // "You've got this!" 💪
+```
+
+**TypeScript/ES Modules:**
+```typescript
+import { justSayIt, ResponseType } from 'just-say-it';
+
+const joke: string = justSayIt('joke');
+const motivation: string = justSayIt('motivation' as ResponseType);
 ```
 
 ### Want More Info? We've Got You Covered
 
 ```javascript
-const { saySomethingWithType, getAvailableTypes } = require('say-something');
+const { justSayItWithType, getAvailableTypes } = require('just-say-it');
 
 // Get response with metadata (for the organized folks)
-const result = saySomethingWithType({ type: 'yes' });
+const result = justSayItWithType({ type: 'yes' });
 console.log(result);
 // { type: 'yes', message: 'Yes, absolutely!' }
 
@@ -64,6 +73,18 @@ console.log(result);
 const types = getAvailableTypes();
 console.log(types);
 // ['no', 'yes', 'maybe', 'joke', 'motivation', 'thank-you', 'apology']
+```
+
+### Backward Compatibility (For Existing Code)
+
+Don't worry if you're using the old function names - they still work! We've got your back:
+
+```javascript
+const { saySomething, saySomethingWithType } = require('just-say-it');
+
+// These still work (but we recommend using justSayIt)
+saySomething('joke');
+saySomethingWithType({ type: 'motivation' });
 ```
 
 ---
@@ -126,7 +147,7 @@ PORT=8080 HOST=0.0.0.0 npm start
 Or programmatically:
 
 ```javascript
-const { startServer } = require('say-something/dist/server');
+const { startServer } = require('just-say-it/dist/server');
 
 const server = await startServer({ port: 8080, host: '0.0.0.0' });
 ```
@@ -137,18 +158,18 @@ const server = await startServer({ port: 8080, host: '0.0.0.0' });
 
 ```bash
 # Get a quick response
-say-something joke
-say-something motivation
-say-something no
+just-say-it joke
+just-say-it motivation
+just-say-it no
 
 # Want JSON? We've got you covered
-say-something yes --json
+just-say-it yes --json
 
 # See what's available
-say-something --list
+just-say-it --list
 
 # Need help? (We all do sometimes)
-say-something --help
+just-say-it --help
 ```
 
 ---
@@ -159,11 +180,11 @@ say-something --help
 
 ```javascript
 const express = require('express');
-const { saySomething } = require('say-something');
+const { justSayIt } = require('just-say-it');
 const app = express();
 
 app.post('/decline', (req, res) => {
-  const politeNo = saySomething('no');
+  const politeNo = justSayIt('no');
   res.json({ message: politeNo });
 });
 
@@ -174,10 +195,10 @@ app.post('/decline', (req, res) => {
 ### Example 2: The Monday Morning Motivator
 
 ```javascript
-const { saySomething } = require('say-something');
+const { justSayIt } = require('just-say-it');
 
 function mondayMotivation() {
-  return saySomething('motivation');
+  return justSayIt('motivation');
 }
 
 console.log(mondayMotivation());
@@ -188,10 +209,10 @@ console.log(mondayMotivation());
 ### Example 3: The Apologetic Developer
 
 ```javascript
-const { saySomething } = require('say-something');
+const { justSayIt } = require('just-say-it');
 
 function apologizeForBreakingProduction() {
-  return saySomething('apology');
+  return justSayIt('apology');
 }
 
 console.log(apologizeForBreakingProduction());
@@ -203,27 +224,29 @@ console.log(apologizeForBreakingProduction());
 
 ## 📚 API Reference (For the Detail-Oriented)
 
-### `saySomething(type?: ResponseType): string`
+### `justSayIt(type?: ResponseType): string`
 
 Returns a random response message. Defaults to `'no'` (because sometimes you just need to say no).
 
 ```javascript
-saySomething('joke');  // Returns a random joke
-saySomething();        // Returns a random "no" (default)
+justSayIt('joke');  // Returns a random joke
+justSayIt();        // Returns a random "no" (default)
 ```
 
 **Throws:** `Error` if the type is invalid (we're helpful like that)
 
-### `saySomethingWithType(options?: SaySomethingOptions): SaySomethingResult`
+### `justSayItWithType(options?: JustSayItOptions): JustSayItResult`
 
 Returns an object with both the type and message (for when you need metadata).
 
 ```javascript
-saySomethingWithType({ type: 'motivation' });
+justSayItWithType({ type: 'motivation' });
 // { type: 'motivation', message: 'You've got this!' }
 ```
 
 **Throws:** `Error` if the type is invalid
+
+**Note:** Legacy function `saySomething()` is still available for backward compatibility.
 
 ### `getAvailableTypes(): ResponseType[]`
 
@@ -243,6 +266,17 @@ isValidType('joke');     // true
 isValidType('invalid');  // false
 ```
 
+### Backward Compatibility
+
+For existing code using the old function names, these are still available:
+
+- `saySomething(type)` → alias for `justSayIt(type)`
+- `saySomethingWithType(options)` → alias for `justSayItWithType(options)`
+- `SaySomethingOptions` → alias for `JustSayItOptions`
+- `SaySomethingResult` → alias for `JustSayItResult`
+
+We recommend migrating to the new names, but your existing code will continue to work.
+
 ---
 
 ## 🏗️ Architecture (For the Curious Minds)
@@ -257,20 +291,52 @@ Built with production-grade practices (because we're professionals, even if we d
 
 ---
 
+## 🧪 Testing (Because Quality Matters)
+
+We've got comprehensive tests to make sure everything works perfectly:
+
+```bash
+# Run all core tests (41 tests)
+npm test
+
+# Run HTTP server tests
+npm run test:server
+
+# Run everything
+npm run test:all
+```
+
+**Test Coverage:**
+- ✅ All 7 response types
+- ✅ Function functionality and error handling
+- ✅ Type validation
+- ✅ Data integrity
+- ✅ Randomness verification
+- ✅ Edge cases
+- ✅ Backward compatibility
+- ✅ Performance benchmarks
+
+All tests pass before publishing (thanks to `prepublishOnly` hook). We take quality seriously (but not ourselves).
+
+---
+
 ## 🛠️ Development (For Contributors and Customizers)
 
 Want to add your own responses? Go for it!
 
 ```bash
 # Clone the repo
-git clone https://github.com/packageengine/say-something.git
-cd say-something
+git clone https://github.com/packageengine/just-say-it.git
+cd just-say-it
 
 # Install dependencies
 npm install
 
 # Build the project
 npm run build
+
+# Run tests
+npm test
 
 # Run in development mode
 npm run dev
@@ -279,6 +345,11 @@ npm run dev
 ### Adding Your Own Responses
 
 Each response type is in its own file. Want to add more jokes? Edit `src/responses/joke.ts`. Want more ways to say no? Edit `src/responses/no.ts`. It's that simple.
+
+After editing, rebuild:
+```bash
+npm run build
+```
 
 ---
 
@@ -301,6 +372,9 @@ A: Trick question! They're all equally amazing. But if we had to pick... `joke`.
 
 **Q: Can I use this in production?**  
 A: Absolutely! It's built with production-grade practices. Just remember: with great power comes great responsibility (and great jokes).
+
+**Q: Is it tested?**  
+A: You bet! We have 41+ comprehensive tests covering everything from basic functionality to edge cases. Run `npm test` to see for yourself.
 
 ---
 
@@ -332,7 +406,7 @@ If this package made you smile (or at least didn't make you cry), consider givin
 
 ## 🔗 Links
 
-- **GitHub**: https://github.com/packageengine/say-something
+- **GitHub**: https://github.com/packageengine/just-say-it
 - **NPM**: Coming soon (we're working on it, promise!)
 
 ---

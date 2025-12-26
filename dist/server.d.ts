@@ -2,7 +2,7 @@ export interface ServerOptions {
     port?: number;
     host?: string;
 }
-export declare class SaySomethingServer {
+export declare class JustSayItServer {
     private server;
     private port;
     private host;
@@ -18,5 +18,5 @@ export declare class SaySomethingServer {
  * @param options - Server options including port and host
  * @returns Promise that resolves when server starts
  */
-export declare function startServer(options?: ServerOptions): Promise<SaySomethingServer>;
+export declare function startServer(options?: ServerOptions): Promise<JustSayItServer>;
 //# sourceMappingURL=server.d.ts.map

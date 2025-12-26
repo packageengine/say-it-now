@@ -2,11 +2,11 @@ import { getRandomResponse, getAllResponseTypes, ResponseType, responses, isVali
 
 export { ResponseType, responses };
 
-export interface SaySomethingOptions {
+export interface JustSayItOptions {
   type?: ResponseType;
 }
 
-export interface SaySomethingResult {
+export interface JustSayItResult {
   type: ResponseType;
   message: string;
 }
@@ -17,7 +17,7 @@ export interface SaySomethingResult {
  * @returns A random response message
  * @throws Error if the type is invalid
  */
-export function saySomething(type: ResponseType = 'no'): string {
+export function justSayIt(type: ResponseType = 'no'): string {
   if (!isValidResponseType(type)) {
     throw new Error(`Invalid response type: "${type}". Available types: ${getAllResponseTypes().join(', ')}`);
   }
@@ -30,7 +30,7 @@ export function saySomething(type: ResponseType = 'no'): string {
  * @returns An object containing the type and message
  * @throws Error if the type is invalid
  */
-export function saySomethingWithType(options: SaySomethingOptions = {}): SaySomethingResult {
+export function justSayItWithType(options: JustSayItOptions = {}): JustSayItResult {
   const type = options.type || 'no';
   if (!isValidResponseType(type)) {
     throw new Error(`Invalid response type: "${type}". Available types: ${getAllResponseTypes().join(', ')}`);
@@ -60,9 +60,15 @@ export function isValidType(type: string): type is ResponseType {
 
 // Default export
 export default {
-  saySomething,
-  saySomethingWithType,
+  justSayIt,
+  justSayItWithType,
   getAvailableTypes,
   isValidType,
 };
+
+// Legacy exports for backward compatibility
+export const saySomething = justSayIt;
+export const saySomethingWithType = justSayItWithType;
+export type SaySomethingOptions = JustSayItOptions;
+export type SaySomethingResult = JustSayItResult;
 

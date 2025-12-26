@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.responses = void 0;
-exports.saySomething = saySomething;
-exports.saySomethingWithType = saySomethingWithType;
+exports.saySomethingWithType = exports.saySomething = exports.responses = void 0;
+exports.justSayIt = justSayIt;
+exports.justSayItWithType = justSayItWithType;
 exports.getAvailableTypes = getAvailableTypes;
 exports.isValidType = isValidType;
 const responses_1 = require("./responses");
@@ -13,7 +13,7 @@ Object.defineProperty(exports, "responses", { enumerable: true, get: function ()
  * @returns A random response message
  * @throws Error if the type is invalid
  */
-function saySomething(type = 'no') {
+function justSayIt(type = 'no') {
     if (!(0, responses_1.isValidResponseType)(type)) {
         throw new Error(`Invalid response type: "${type}". Available types: ${(0, responses_1.getAllResponseTypes)().join(', ')}`);
     }
@@ -25,7 +25,7 @@ function saySomething(type = 'no') {
  * @returns An object containing the type and message
  * @throws Error if the type is invalid
  */
-function saySomethingWithType(options = {}) {
+function justSayItWithType(options = {}) {
     const type = options.type || 'no';
     if (!(0, responses_1.isValidResponseType)(type)) {
         throw new Error(`Invalid response type: "${type}". Available types: ${(0, responses_1.getAllResponseTypes)().join(', ')}`);
@@ -52,9 +52,12 @@ function isValidType(type) {
 }
 // Default export
 exports.default = {
-    saySomething,
-    saySomethingWithType,
+    justSayIt,
+    justSayItWithType,
     getAvailableTypes,
     isValidType,
 };
+// Legacy exports for backward compatibility
+exports.saySomething = justSayIt;
+exports.saySomethingWithType = justSayItWithType;
 //# sourceMappingURL=index.js.map
